@@ -1,0 +1,66 @@
+[tool.poetry]
+name = "baseline-template"
+version = "0.1.0"
+description = "A baseline template for machine learning projects"
+authors = ["Maxim Kirilyuk <werserk@inbox.ru>"]
+readme = "README.md"
+packages = [{ include = "app", from = "src" }]
+
+[tool.poetry.dependencies]
+python = ">=3.11"
+python-dotenv = "^1.0.0"
+loguru = "^0.7.0"
+pytz = "^2024.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+pytest-cov = "^4.1.0"
+ruff = "^0.8.0"
+pre-commit = "^3.5.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 120
+preview = true
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle: Enforces PEP 8 style errors
+    "F",   # pyflakes: Detects undefined or unused variables
+    "W",   # pycodestyle: Additional style warnings
+    "I",   # isort: Ensures imports are properly sorted
+    "UP",  # pyupgrade: Modernizes code to use newer Python features
+    "B",   # flake8-bugbear: Highlights common bugs and bad practices
+    "C4",  # flake8-comprehensions: Suggests improvements for comprehensions
+    "SIM", # flake8-simplify: Simplifies complex expressions
+    "Q",   # flake8-quotes: Enforces consistent usage of quotes
+    "RET", # flake8-return: Ensures return statements are consistent
+    "ARG", # flake8-unused-arguments: Warns about unused function arguments
+    "TCH", # flake8-type-checking: Improves type-checking practices
+    "ANN", # flake8-annotations: Encourages the use of type annotations
+    "RUF", # Ruff-specific rules: Adds optimizations specific to Ruff
+    "C90", # McCabe complexity checker
+]
+ignore = [
+    "CPY001", # Ignore annotations for self
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+"tests/**/*" = ["ARG001", "ARG002"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q --cov=case_baseline --cov-report=term-missing --cov-report=html"
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
