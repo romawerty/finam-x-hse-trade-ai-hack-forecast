@@ -1,14 +1,49 @@
+# Python
 .venv/
 __pycache__/
 *.pyc
 *.pyo
-*.DS_Store
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment
 .env
+.env.local
+
+# Data - Keep only what's needed for participants
 data/raw/
 data/interim/
-out/
-artifacts/
 !data/raw/.gitkeep
 !data/interim/.gitkeep
+
+# CRITICAL: Hide private test keys from participants
+data/hidden/
+
+# Artifacts - generated files
+artifacts/
+out/
 logs/
 !logs/.gitkeep
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# System
+Thumbs.db

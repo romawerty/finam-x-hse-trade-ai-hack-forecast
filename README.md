@@ -1,75 +1,48 @@
-# Baseline Template
+# FORECAST — Minimal, Scalable Baseline
 
-A baseline template for machine learning projects.
+**Goal**: simple & fast baseline with strict time scheme (no leakage), two horizons (t+1 daily return, 20-day cumulative return), and up-probabilities.
 
-## Setup
-
-### 1. Create Virtual Environment
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-### 2. Install Poetry
-```bash
-curl -sSL https://install.python-poetry.org | python3 -
-# Or using pip
-pip install poetry
-```
-
-### 3. Install Dependencies
-```bash
-poetry install
-```
-
-## Project Structure
-
-```
-├── data/               # Data directory
-│   ├── raw/           # Raw data
-│   ├── interim/       # Intermediate data
-│   └── processed/     # Processed data
-├── docs/              # Documentation
-│   ├── data.md        # Data documentation
-│   ├── evaluation.md  # Evaluation metrics
-│   └── task.md        # Task description
-├── notebooks/         # Jupyter notebooks
-├── scripts/           # Utility scripts
-├── src/case_baseline/ # Source code
-│   ├── core/          # Core functionality
-│   ├── domain/        # Domain logic
-│   ├── modes/         # Different execution modes
-│   └── utils/         # Utilities
-└── tests/             # Unit tests
-```
-
-## Code Quality
-
-### Formatting and Linting
-Use Ruff for code formatting and linting:
+## Quickstart
 
 ```bash
-# Format code
-poetry run ruff format .
+python -m forecast_baseline train \
+  --candles data/raw/task_1_candles.csv \
+  --news data/raw/task_5_news.csv \
+  --outdir artifacts/ \
+  --t0 2023-06-30 --t1 2023-12-31
 
-# Lint code
-poetry run ruff check .
+python -m forecast_baseline predict \
+  --candles data/raw/task_1_candles.csv \
+  --news data/raw/task_5_news.csv \
+  --artifacts artifacts/ \
+  --outfile outputs/submission.csv
 
-# Fix auto-fixable issues
-poetry run ruff check --fix .
+python -m forecast_baseline evaluate \
+  --pred outputs/submission.csv \
+  --truth data/processed/ground_truth.csv
 ```
 
-### Pre-commit Hooks
-Install pre-commit hooks for automatic code quality checks:
+## Data format (given by organizers)
+- `task_1_candles.csv`: columns `begin, ticker, open, high, low, close, volume`.
+- `task_5_news.csv`: columns `publish_date, title, publication, tickers`.
 
-```bash
-poetry run pre-commit install
-```
+## Submission format
+CSV with columns:
+`date,ticker,r1_pred,R20_pred,p_up_1,p_up_20`
 
-## Testing
+## Reproducibility
+- Fixed seed, sklearn RNG.
+- Logged config + versions.
 
-Run tests with coverage:
+## Model
+- Linear models (Ridge) for `r_{t+1}`, `R_{t+20}`.
+- LogisticRegression for `p_up` on both horizons.
+- Global models across tickers with one-hot ticker.
 
-```bash
-poetry run pytest
-```
+## Features
+- Price features: lag returns, rolling mean/std, z-score, ATR-like range.
+- News features: TF-IDF over title+publication, aggregated by (ticker, date), shifted to `t-1`.
+
+## Notes
+- Replace TF-IDF with Hashing if speed/footprint is critical.
+- Replace linear models with tree-based (LGBM/CatBoost) if needed; interface unchanged.
