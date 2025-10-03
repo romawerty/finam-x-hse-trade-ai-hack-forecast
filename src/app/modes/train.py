@@ -6,11 +6,11 @@ from typing import Optional
 import numpy as np
 import pandas as pd
 
-from .config import Config
-from .data import DataLoader
-from .features import add_price_features, build_news_matrix
-from .model import Artifacts, build_pipelines
-from .utils import save_json, set_seed
+from ..core.config import Config
+from ..core.model import Artifacts, build_pipelines
+from ..domain.data import DataLoader
+from ..domain.features import add_price_features, build_news_matrix
+from ..utils.utils import save_json, set_seed
 
 
 def train(
@@ -90,3 +90,4 @@ def train(
         "config": Config().__dict__,
     }
     save_json(f"{outdir}/meta.json", meta)
+

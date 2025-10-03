@@ -4,10 +4,10 @@ from typing import Optional
 
 import pandas as pd
 
-from .config import Config
-from .data import DataLoader
-from .features import add_price_features, build_news_matrix
-from .model import Artifacts
+from ..core.config import Config
+from ..core.model import Artifacts
+from ..domain.data import DataLoader
+from ..domain.features import add_price_features, build_news_matrix
 
 
 def predict(
@@ -65,3 +65,4 @@ def predict(
     })
     out = out.sort_values(["date", "ticker"])  # stable order
     out.to_csv(outfile, index=False)
+

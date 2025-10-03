@@ -68,3 +68,4 @@ def build_pipelines(num_cols: list[str], cat_cols: list[str]) -> Artifacts:
         ("clf", LogisticRegression(max_iter=200, solver="lbfgs"))
     ])
     return Artifacts(pipe_r1=pipe_r1, pipe_R20=pipe_R20, pipe_up1=pipe_up1, pipe_up20=pipe_up20)
+

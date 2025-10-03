@@ -78,3 +78,4 @@ def build_news_matrix(
     feat = keys.merge(agg, on=["ticker", "date"], how="left").fillna(0.0)
     feat = feat.rename(columns={"date": date_col})
     return feat, tfidf
+

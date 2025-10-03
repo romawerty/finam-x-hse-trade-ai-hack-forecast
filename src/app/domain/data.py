@@ -31,3 +31,4 @@ class DataLoader:
         # normalize to date for join and shift later
         df["news_date"] = df["publish_date"].dt.date
         return df
+

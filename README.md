@@ -5,19 +5,19 @@
 ## Quickstart
 
 ```bash
-python -m forecast_baseline train \
+python -m src.app train \
   --candles data/raw/task_1_candles.csv \
   --news data/raw/task_5_news.csv \
   --outdir artifacts/ \
   --t0 2023-06-30 --t1 2023-12-31
 
-python -m forecast_baseline predict \
+python -m src.app predict \
   --candles data/raw/task_1_candles.csv \
   --news data/raw/task_5_news.csv \
   --artifacts artifacts/ \
   --outfile outputs/submission.csv
 
-python -m forecast_baseline evaluate \
+python -m src.app evaluate \
   --pred outputs/submission.csv \
   --truth data/processed/ground_truth.csv
 ```

@@ -18,4 +18,4 @@ dependencies = [
 ]
 
 [project.scripts]
-forecast-baseline = "forecast_baseline.cli:main"
+forecast-baseline = "src.app.cli:main"

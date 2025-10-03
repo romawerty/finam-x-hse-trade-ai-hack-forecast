@@ -37,3 +37,4 @@ def evaluate(pred_csv: str, truth_csv: str) -> dict[str, float]:
         "DA_1": da1,
         "DA_20": da20,
     }
+

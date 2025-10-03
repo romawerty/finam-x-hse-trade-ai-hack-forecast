@@ -19,3 +19,4 @@ class Config:
 
     # artifacts
     artifacts_dir: Path = Path("artifacts")
+

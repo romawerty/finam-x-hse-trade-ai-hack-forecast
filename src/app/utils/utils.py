@@ -18,3 +18,4 @@ def set_seed(seed: int) -> None:
 def save_json(path: str, obj: dict[str, Any]) -> None:
     with open(path, "w", encoding="utf-8") as f:
         json.dump(obj, f, ensure_ascii=False, indent=2)
+
