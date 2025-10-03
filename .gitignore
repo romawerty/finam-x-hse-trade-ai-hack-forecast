@@ -47,3 +47,6 @@ logs/
 
 # System
 Thumbs.db
+data/processed/organizers/
+scripts/prepare_data.py
+scripts/evaluate_submission.py
