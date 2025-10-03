@@ -30,6 +30,7 @@ build/
 data/raw/
 data/interim/
 !data/raw/.gitkeep
+!data/raw/participants/*
 !data/interim/.gitkeep
 
 # CRITICAL: Hide private test keys from participants
