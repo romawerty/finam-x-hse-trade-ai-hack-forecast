@@ -27,8 +27,10 @@ build/
 .env.local
 
 # Data - Keep only what's needed for participants
-data/raw/
+data/raw/*
 data/interim/
+!data/raw/participants/
+!data/raw/participants/**
 !data/raw/.gitkeep
 !data/raw/participants/*
 !data/interim/.gitkeep
